@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+spec:
+  replicas: 2  # Número inicial de réplicas
+  selector:
+    matchLabels:
+      app: mi-api
+  template:
+    metadata:
+      labels:
+        app: mi-api
+    spec:
+      containers:
+        - name: api-container
+          image: l23303239/mi-api-node:latest # Nombre de la imagen (debe ser accesible)
+          ports:
+            - containerPort: 4000
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
