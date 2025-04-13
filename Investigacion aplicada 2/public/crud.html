@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD de Contactos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        form button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #2980b9;
+        }
+
+        table {
+            width: 90%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        table thead {
+            background-color: #3498db;
+            color: white;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        button {
+            padding: 6px 12px;
+            margin-right: 5px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        button:nth-child(1) {
+            background-color: #27ae60; /* Editar */
+            color: white;
+        }
+
+        button:nth-child(2) {
+            background-color: #e74c3c; /* Eliminar */
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>CRUD de Contactos</h1>
+
+    <h2>Agregar / Editar Contacto</h2>
+    <form id="contactForm">
+        <input type="hidden" name="id" id="id">
+        <input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
+        <input type="email" name="email" id="email" placeholder="Email" required>
+        <textarea name="mensaje" id="mensaje" placeholder="Mensaje" required></textarea>
+        <button type="submit">Guardar</button>
+    </form>
+
+    <h2>Contactos Registrados</h2>
+    <table border="1" id="contactsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Mensaje</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los datos se llenan aquí -->
+        </tbody>
+    </table>
+
+    <script>
+        const form = document.getElementById('contactForm');
+        const idField = document.getElementById('id');
+        const nombreField = document.getElementById('nombre');
+        const emailField = document.getElementById('email');
+        const mensajeField = document.getElementById('mensaje');
+        const tableBody = document.querySelector('#contactsTable tbody');
+
+        function cargarContactos() {
+            fetch('/data')
+                .then(response => response.json())
+                .then(data => {
+                    tableBody.innerHTML = '';
+                    data.forEach(contact => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${contact.id}</td>
+                            <td>${contact.nombre}</td>
+                            <td>${contact.email}</td>
+                            <td>${contact.mensaje}</td>
+                            <td>
+                                <button onclick="editarContacto(${contact.id}, '${contact.nombre}', '${contact.email}', \`${contact.mensaje}\`)">Editar</button>
+                                <button onclick="eliminarContacto(${contact.id})">Eliminar</button>
+                            </td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                });
+        }
+
+        function editarContacto(id, nombre, email, mensaje) {
+            idField.value = id;
+            nombreField.value = nombre;
+            emailField.value = email;
+            mensajeField.value = mensaje;
+        }
+
+        function eliminarContacto(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar este contacto?')) {
+                fetch('/data', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ action: 'delete', id })
+                }).then(() => {
+                    cargarContactos();
+                    form.reset();
+                });
+            }
+        }
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const id = idField.value;
+            const action = id ? 'update' : 'create';
+
+            const datos = new URLSearchParams({
+                action,
+                id,
+                nombre: nombreField.value,
+                email: emailField.value,
+                mensaje: mensajeField.value
+            });
+
+            fetch('/data', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: datos
+            }).then(() => {
+                cargarContactos();
+                form.reset();
+            });
+        });
+
+        // Cargar los contactos al iniciar
+        cargarContactos();
+    </script>
+</body>
+</html>

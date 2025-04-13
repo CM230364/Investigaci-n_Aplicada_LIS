@@ -1,0 +1,168 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+}
+
+input, textarea {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.contact-form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+.submit-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.message {
+    margin-top: 1rem;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.error {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+.view-crud-btn {
+    display: block;
+    margin-top: 1rem;
+    text-align: center;
+    color: #2196F3;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.view-crud-btn:hover {
+    text-decoration: underline;
+}
+
+/* Estilos adicionales para header y nav */
+.main-header {
+    text-align: center;
+    padding: 2rem 0;
+    background-color: #f0f0f0;
+    margin-bottom: 2rem;
+}
+
+.main-header h1 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.main-header nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.main-header nav a {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #007bff;
+    border-radius: 4px;
+}
+
+.main-header nav a:hover {
+    background-color: #e0e0e0;
+}
+
+.main-header nav a.active {
+    background-color: #007bff;
+    color: white;
+}
+
