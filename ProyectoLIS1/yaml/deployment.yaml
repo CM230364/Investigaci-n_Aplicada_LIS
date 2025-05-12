@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: citasdentales-php
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: citasDentales-php
+  template:
+    metadata:
+      labels:
+        app: citasdentales-php
+    spec:
+      containers:
+        - name: php-container
+          image: ricky/citasdentales-php:latest  # Reemplaza por tu repo de Docker Hub
+          ports:
+            - containerPort: 80

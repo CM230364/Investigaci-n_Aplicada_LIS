@@ -1,0 +1,81 @@
+
+:root {
+    --color-fondo: #e6f4f1;
+    --color-primario: #009688;
+    --color-secundario: #00796b;
+    --color-texto: #333;
+    --color-blanco: #ffffff;
+    --sombra: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --radio: 12px;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--color-fondo);
+    margin: 0;
+    padding: 30px;
+    color: var(--color-texto);
+}
+
+h1, h2 {
+    color: var(--color-primario);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Información general */
+p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 8px 0;
+}
+
+/* Secciones con fondo blanco */
+form, .odontograma-container, .info-box {
+    background-color: var(--color-blanco);
+    border-radius: var(--radio);
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: var(--sombra);
+    max-width: 700px;
+}
+
+/* Campos de texto */
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: var(--radio);
+    resize: vertical;
+    font-size: 15px;
+}
+
+/* Botones atractivos */
+button {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radio);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--color-secundario);
+}
+
+/* Imagen odontograma */
+.odontograma-image {
+    max-width: 100%;
+    border-radius: var(--radio);
+    margin-top: 15px;
+}
+
+/* Archivo de carga */
+.upload-form input[type="file"] {
+    margin-top: 10px;
+}
